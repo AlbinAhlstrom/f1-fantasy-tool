@@ -14,7 +14,10 @@ if response.status_code == 200:
         print(driver_name)
         # print(driver["color"])
         # print(driver["constructor"])
-        # print(driver["race_results"])
+        for race in driver["race_results"]:
+            print(race)
+            break
+        break
 
 else:
     print(f"Could not fetch data. Status code {response.status_code} ")
