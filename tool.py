@@ -1,23 +1,17 @@
 import requests
 
 
-driver_url = "https://f1fantasytoolsapi-szumjzgxfa-ew.a.run.app/race-results/driver?season=2023"
+def get_names(drivers):
+    return [driver["abbreviation"] for driver in drivers]
 
+
+driver_url = "https://f1fantasytoolsapi-szumjzgxfa-ew.a.run.app/race-results/drive?season=2023"
 response = requests.get(driver_url)
 
-if response.status_code == 200:
-    data = response.json()
+if response.status_code != 200:
+    raise Exception(f"failed to fetch url. {response.status_code}")
 
-    for driver in data:
-        driver_name = driver["abbreviation"]
+drivers = response.json()
+points = get_names(drivers)
 
-        print(driver_name)
-        # print(driver["color"])
-        # print(driver["constructor"])
-        for race in driver["race_results"]:
-            print(race)
-            break
-        break
-
-else:
-    print(f"Could not fetch data. Status code {response.status_code} ")
+print(points)
